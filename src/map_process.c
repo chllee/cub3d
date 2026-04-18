@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 16:47:07 by pang              #+#    #+#             */
-/*   Updated: 2026/04/18 18:06:23 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/18 23:27:21 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 bool	empty_line(const char *line)
 {
 	if (!line)
-		return (false);
+		return (true);
 	while (*line)
 	{
 		if (!(*line == ' ' || (*line >= 7 && *line <= 13)))
-			return (true);
+			return (false);
 		line++;
 	}
-	return (false);
+	return (true);
 }
 
-int	count_row(char *filename)
+static int	count_row(char *filename)
 {
 	int		fd;
 	int		count;
@@ -38,13 +38,20 @@ int	count_row(char *filename)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (empty_line(line))
+		strip_newline(line);
+		if (!empty_line(line))
 			count++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);
+}
+
+void	map_validity(t_map *map)
+{
+	valid_char(map);
+	check_player(map);
 }
 
 t_map	*process_map(char *filename)
@@ -62,9 +69,10 @@ t_map	*process_map(char *filename)
 		exit_error("Empty map\n");
 	map = store_map(filename, lines_count);
 
-	map->col_count  = ft_strlen(map->grid[0]);
 	ft_printf("process_map: lines count: %d\n", lines_count);
 	ft_printf("process_map map->row_count: %d\n", map->row_count);
-	ft_printf("process_map nmap->col_count: %d\n", map->col_count);
+	ft_printf("process_map map->col_count: %d\n", map->col_count);
+	print_map(map);
+	map_validity(map);
 	return (map);
 }

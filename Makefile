@@ -22,7 +22,7 @@ INCLUDES = -I$(SRC_DIR) \
            -I$(FTPRINTF_DIR) \
            -I$(GNL_DIR)
 
-SRC_FILES = z_print_map.c main.c map_utils.c map_process.c map_storage.c 
+SRC_FILES = z_print_map.c main.c map_utils.c map_process.c map_storage.c map_validity.c
 
 SRC       = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ       = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))

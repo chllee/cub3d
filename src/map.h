@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:25 by pang              #+#    #+#             */
-/*   Updated: 2026/04/18 18:07:18 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/18 23:20:02 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@
 typedef	struct s_map
 {
 	char	**grid;
-	int		row_count;
-	int		col_count;
+	int		row_count; //max
+	int		col_count; //max
+	int		row;
+	int		col;
 }	t_map;
 
 
@@ -38,13 +40,16 @@ void	free_map(t_map *map);
 void	freealloc_exit(t_map *map, char *msg);
 
 // map_process.c
-bool	empty_line(const char *line);
-int		count_row(char *filename);
 t_map	*process_map(char *filename);
+bool	empty_line(const char *line);
 
 // map_storage.c
 t_map	*store_map(char *filename, int lines_count);
+void	strip_newline(char *line);
 
+// map_validity.c
+void	valid_char(t_map *map);
+void	check_player(t_map *map);
 
 
 // z_print_map.h

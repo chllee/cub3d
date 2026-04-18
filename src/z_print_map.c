@@ -4,13 +4,14 @@ t_map	*print_map(t_map *map)
 {
 	int	x;
 	int	y;
+	int	row_len;
 
 	x = 0;
-	y = 0;
 	while (x < map->row_count)
 	{
 		y = 0;
-		while (y < map->col_count)
+		row_len = ft_strlen(map->grid[x]);
+		while (y < row_len)
 		{
 			ft_printf("%c", map->grid[x][y]);
 			y++;
