@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+/* char	*ft_strchr(const char *s, int c)
 {
 	int	count;
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c == '\0')
 		return ((char *)s + count);
 	return (NULL);
-}
+} */
 
 char	*ft_strjoin_sub(char const *s1, char const *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:12:39 by pang              #+#    #+#             */
-/*   Updated: 2026/04/18 22:40:58 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 20:40:33 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,51 +22,79 @@ void	strip_newline(char *line)
 		line[len - 1] = '\0';
 }
 
+/* static int	count_row(int fd)
+{
+	int		count;
+	char	*line;
+
+	count = 0;
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		strip_newline(line);
+		if (!empty_line(line))
+			count++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (count);
+} */
+
 // read map
 static int	read_map(int fd, t_map *map)
 {
 	char	*line;
 	int		index;
-	int		len;
 
 	index = 0;
-	len = 0;
-	map->col_count = 0;
-	line = get_next_line(fd);
-	while (line)
+	while ((line = get_next_line(fd)))
 	{
 		strip_newline(line);
-		if (!empty_line(line))
+		if (index > 0 && empty_line(line))
 		{
-			map->grid[index++] = line;
-			len = ft_strlen(line);
-			if (len > map->col_count)
-				map->col_count = len;
-		}
-		else
 			free(line);
-		line = get_next_line(fd);
+			break ;
+		}
+		map->grid[index] = ft_strdup(line);
+		if ((int)ft_strlen(line) > map->x_max)
+			map->x_max = ft_strlen(line);
+		index++;
+		free(line);
 	}
 	map->grid[index] = NULL;
 	return (index);
 }
 
 // Store map into 3D array
-t_map	*store_map(char *filename, int lines_count)
+/* t_map	*store_map(char *filename, t_map *map)
 {
-	int		fd;
-	t_map	*map;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		exit_error("Store map file cannot be opened");
-	map = malloc(sizeof(t_map));
-	if (!map)
-		exit_error("Map allocation fail\n");
-	map->grid = malloc(sizeof(char *) * (lines_count + 1));
+		freealloc_exit(map, "Unable to store map");
+	map->y_max = count_row(fd);
+	close(fd);
+	map->grid = malloc(sizeof(char *) * (map->y_max + 1));
 	if (!map->grid)
 		freealloc_exit(map, "Map grid allocation fail\n");
-	map->row_count = read_map(fd, map);
+	fd = open(filename, O_RDONLY);
+	read_map(fd, map);
 	close(fd);
+	return (map);
+} */
+
+t_map	*store_map(int fd, t_map *map)
+{
+	int	rows;
+
+	// Rough upper bound or use a dynamic array; simplest: just read and count
+	map->grid = malloc(sizeof(char *) * 1024); // temp ceiling
+	if (!map->grid)
+		freealloc_exit(map, "Map grid allocation fail");
+	rows = read_map(fd, map);
+	map->y_max = rows;
+	// optionally realloc to exact size here
 	return (map);
 }

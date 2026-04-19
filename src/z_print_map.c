@@ -1,25 +1,24 @@
 #include "map.h"
 
-t_map	*print_map(t_map *map)
+t_map   *print_map(t_map *map)
 {
-	int	x;
-	int	y;
-	int	row_len;
+    int y;
 
-	x = 0;
-	while (x < map->row_count)
-	{
-		y = 0;
-		row_len = ft_strlen(map->grid[x]);
-		while (y < row_len)
-		{
-			ft_printf("%c", map->grid[x][y]);
-			y++;
-		}
-		ft_printf("\n");
-		x++;
-	}
-	return (map);
+    if (!map || !map->grid)
+    {
+        ft_printf("No map grid to print.\n");
+        return (map);
+    }
+    y = 0;
+    ft_printf("--- START OF GRID ---\n");
+    while (y < map->y_max)
+    {
+        ft_printf("%s\n", map->grid[y]);
+        y++;
+    }
+    ft_printf("--- END OF GRID ---\n");
+    ft_printf("Dimensions: y_max: %d, x_max: %d\n", map->y_max, map->x_max);
+    return (map);
 }
 
 /* int	enemy_map_validity(t_map *original_map)

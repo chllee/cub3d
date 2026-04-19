@@ -17,6 +17,8 @@ char	*ft_strchr(const char *s, int c)
 	int	count;
 
 	count = 0;
+	if (!s)
+		return (NULL);
 	while (s[count] != '\0')
 	{
 		if (s[count] == (char)c)

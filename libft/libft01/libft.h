@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdbool.h>
 
 typedef struct s_list
 {
@@ -68,5 +69,6 @@ int			ft_lstsize(t_list *lst);
 t_list		*ft_lstnew(void	*content);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+bool		ft_isspace(char c);
 
 #endif
