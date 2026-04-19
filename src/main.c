@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:32 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 18:58:51 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:32:43 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int main(int argc, char **argv)
 	map = process_file(argv[1]);
 	(void)map;
 	
-	free_map(map);
+	free_resources(map);
 	return (0);
 }

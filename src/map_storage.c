@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:12:39 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 20:40:33 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:28:41 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static int	read_map(int fd, t_map *map)
 		if (index > 0 && empty_line(line))
 		{
 			free(line);
+			while ((line = get_next_line(fd)))
+				free(line);
 			break ;
 		}
 		map->grid[index] = ft_strdup(line);

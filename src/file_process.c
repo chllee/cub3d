@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:19:46 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 20:44:59 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:57:23 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_map	*process_file(char *filename)
 			if (map->texture_count < 6)
 			{
 				free(line);
+				while ((line = get_next_line(fd)))
+					free(line);
 				freealloc_exit(map, "Missing headers before map");
 			}
 			free(line);
@@ -68,6 +70,9 @@ t_map	*process_file(char *filename)
 		free(line);
 	}
 	close(fd);
+
+	ft_printf("process_file\nNO: %s\nSO: %s\nWE: %s\nEA: %s\nF: %s\nC: %s\n", map->no_path, map->so_path, map->we_path, map->ea_path, map->f_path, map->c_path);
+	ft_printf("Process_file, map->texture_count: %d\n", map->texture_count);
 	//map_validity(map);
 	return (map);
 }
@@ -85,10 +90,18 @@ void	path_allocation(char *str, t_map *map)
 	}
 	if (ft_strncmp(str, "NO", 2) == 0)
 		map->no_path = ft_strtrim(path, "\n ");
-	if (ft_strncmp(str, "SO", 2) == 0)
+	else if (ft_strncmp(str, "SO", 2) == 0)
 		map->so_path = ft_strtrim(path, "\n ");
-	if (ft_strncmp(str, "WE", 2) == 0)
+	else if (ft_strncmp(str, "WE", 2) == 0)
 		map->we_path = ft_strtrim(path, "\n ");
-	if (ft_strncmp(str, "EA", 2) == 0)
+	else if (ft_strncmp(str, "EA", 2) == 0)
 		map->ea_path = ft_strtrim(path, "\n ");
+	else if (ft_strncmp(str, "F", 1) == 0)
+		map->f_path = ft_strtrim(path, "\n ");
+	else if (ft_strncmp(str, "C", 1) == 0)
+		map->c_path = ft_strtrim(path, "\n ");
+	else
+		return ;
+	map->texture_count++;
+	ft_printf("path_allocation, map->texture_count: %d\n", map->texture_count);
 }

@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:25 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 20:38:06 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:40:53 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef	struct s_map
 	char	*so_path;
 	char	*we_path;
 	char	*ea_path;
+	char	*f_path;
+	char	*c_path;
 
 	int		texture_count;
 }	t_map;
@@ -47,6 +49,7 @@ typedef	struct s_map
 void	exit_error(char *msg);
 void	free_map(t_map *map);
 void	freealloc_exit(t_map *map, char *msg);
+void	free_resources(t_map *map);
 
 // map_storage.c
 //t_map	*store_map(char *filename, t_map *map);

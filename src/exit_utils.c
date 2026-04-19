@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:42 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 19:55:28 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/19 22:41:31 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,29 @@ void	free_map(t_map *map)
 	free(map);
 }
 
+void	free_resources(t_map *map)
+{
+	if (!map)
+		return ;
+	if (map->no_path)
+		free(map->no_path);
+	if (map->so_path)
+		free(map->so_path);
+	if (map->we_path)
+		free(map->we_path);
+	if (map->ea_path)
+		free(map->ea_path);
+	if (map->f_path)
+		free(map->f_path);
+	if (map->c_path)
+		free(map->c_path);
+	free_map(map);
+
+}
+
 void	freealloc_exit(t_map *map, char *msg)
 {
-	free_map(map);
-	ft_printf("Error %s\n", msg);
+	free_resources(map);
+	ft_printf("Error: %s\n", msg);
 	exit(EXIT_FAILURE);
 }
