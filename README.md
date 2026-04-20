@@ -19,8 +19,8 @@ Maps
 |4c| Map boundaries check | :heavy_check_mark: |
 |4d| Player path check | temp no need |
 | 5| Texture/Color Parsing | |
-|5a| NO, SO, WE, EA paths valid | |
-|5b| F, C colors (0-255) valid | |
-| 6| Strict Element Order check | |
+|5a| NO, SO, WE, EA paths valid | :heavy_check_mark: |
+|5b| F, C colors (0-255) valid | :heavy_check_mark: |
+| 6| Strict Element Order check | :heavy_check_mark: |
 
 

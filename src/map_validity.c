@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 21:48:34 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 17:14:48 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/20 05:25:03 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	valid_char(t_map *map)
 {
 	char	c;
 
+	if (!map || !map->grid)
+		freealloc_exit(map, "Empty map");
 	map->row = 0;
 	while (map->grid[map->row])
 	{

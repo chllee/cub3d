@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:24:34 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 19:42:38 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/20 06:24:33 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,27 @@ bool	empty_line(const char *line)
 bool	is_mapline(char *line)
 {
 	return (line[0] == '1' || line[0] == '0' || line[0] == ' ');
+}
+
+void	clear_gnl_buffer(int fd)
+{
+	char	*line;
+
+	while ((line = get_next_line(fd)))
+		free(line);
+}
+
+void	free_split(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return ;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }
