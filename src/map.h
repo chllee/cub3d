@@ -6,24 +6,24 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:25 by pang              #+#    #+#             */
-/*   Updated: 2026/04/20 07:21:49 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:27:48 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-#include "ft_printf.h"
-#include "get_next_line.h"
-#include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
+# include "libft.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
-#include <stdbool.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <fcntl.h>
+# include <stdbool.h>
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char			**grid;
 	int				x_max; //max col_count (width)
@@ -45,7 +45,6 @@ typedef	struct s_map
 	unsigned int	f_hex;
 	unsigned int	c_hex;
 }	t_map;
-
 
 // exit_utils.c
 void	exit_error(char *msg);

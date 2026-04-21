@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:42 by pang              #+#    #+#             */
-/*   Updated: 2026/04/19 22:41:31 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:22:28 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	free_resources(t_map *map)
 	if (map->c_path)
 		free(map->c_path);
 	free_map(map);
-
 }
 
 void	freealloc_exit(t_map *map, char *msg)

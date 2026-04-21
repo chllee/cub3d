@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:12:39 by pang              #+#    #+#             */
-/*   Updated: 2026/04/20 07:08:18 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:25:32 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static int	read_map(int fd, t_map *map)
 
 	index = 0;
 	found_empty_after_map = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		strip_newline(line);
 		if (index > 0 && empty_line(line))

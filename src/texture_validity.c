@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:15:28 by pang              #+#    #+#             */
-/*   Updated: 2026/04/20 06:34:50 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:28:45 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	valid_colours(char *str, t_map *map)
 
 	comma_count = 0;
 	i = 0;
-	if(!str)
+	if (!str)
 		freealloc_exit(map, "Missing colour information");
 	while (str[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:19:46 by pang              #+#    #+#             */
-/*   Updated: 2026/04/20 07:17:37 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:23:55 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_map	*init_map(void)
 static int	handle_line(char *line, t_map *map, int fd)
 {
 	char	*temp;
-	
+
 	strip_newline(line);
 	temp = line;
 	while (*temp && ft_isspace(*temp))
@@ -71,7 +71,8 @@ t_map	*process_file(char *filename)
 	if (fd == -1)
 		exit_error("Cannot open file");
 	map = init_map();
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		line_count++;
 		if (handle_line(line, map, fd))
@@ -84,8 +85,7 @@ t_map	*process_file(char *filename)
 		}
 		free(line);
 	}
-	close(fd);
-	return (freealloc_exit(map, "No map found"), NULL);
+	return (close(fd), freealloc_exit(map, "No map found"), NULL);
 }
 
 void	map_validity(t_map *map)

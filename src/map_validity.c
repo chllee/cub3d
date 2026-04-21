@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 21:48:34 by pang              #+#    #+#             */
-/*   Updated: 2026/04/20 05:25:03 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/21 21:30:02 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	valid_char(t_map *map)
 		{
 			c = map->grid[map->row][map->col];
 			if (c != '0' && c != '1' && c != ' '
-				&& c != 'N'	&& c != 'S' && c != 'E' && c != 'W')
-					freealloc_exit(map, "Invalid characters");
+				&& c != 'N' && c != 'S' && c != 'E' && c != 'W')
+				freealloc_exit(map, "Invalid characters");
 			map->col++;
 		}
 		map->row++;
@@ -60,8 +60,6 @@ void	check_player(t_map *map)
 	}
 	if (p != 1)
 		freealloc_exit(map, "Single player only");
-	ft_printf("check_player: %d\n", p);
-	ft_printf("Check_player coordinates: %d %d %c\n", map->p_start_x, map->p_start_y, map->p_start_dir);
 }
 
 // flood fill a copy of map
