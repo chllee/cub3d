@@ -1,0 +1,21 @@
+       
+  		F 0, 0, 255
+	C 1, 1, 1
+
+
+NO ./textures/test/north.xpm
+SO ./textures/test/south.xpm
+WE ./textures/test/west.xpm     
+EA ./textures/test/east.xpm     
+       
+
+111111111111
+1         11
+1       0001
+111111111111
+10001  1010011
+10S01  1000001
+11101111110111
+110000000001
+1111111111111
+
