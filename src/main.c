@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
+/*   By: chllee <chllee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/18 14:08:32 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:29:29 by pang             ###   ########.fr       */
+/*   Created: 2026/04/22 08:37:42 by chllee            #+#    #+#             */
+/*   Updated: 2026/04/22 08:38:11 by chllee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-
-// print_map(map) is for debug
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_map	*map;
-
-	if (argc != 2)
-		exit_error("Invalid argument");
-	file_ext(argv[1]);
-	map = process_file(argv[1]);
-	print_map(map);
-	free_resources(map);
-	return (0);
+    return (0);
 }
