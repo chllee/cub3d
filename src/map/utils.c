@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:24:34 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:29:05 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 21:52:35 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	clear_gnl_buffer(int fd)
 
 	line = get_next_line(fd);
 	while (line)
+	{
 		free(line);
+		line = get_next_line(fd);
+	}
 }
 
 void	free_split(char **str)
