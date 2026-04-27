@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:12:39 by pang              #+#    #+#             */
-/*   Updated: 2026/04/27 07:13:57 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 22:03:04 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ void	strip_newline(char *line)
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		line[len - 1] = '\0';
+}
+
+static void	clear_map(char *line, t_map *map, int fd)
+{
+	free(line);
+	clear_gnl_buffer(fd);
+	freealloc_exit(map, "Content found after map end");
 }
 
 static int	read_map(int fd, t_map *map)
@@ -39,11 +46,7 @@ static int	read_map(int fd, t_map *map)
 		else if (!empty_line(line))
 		{
 			if (found_empty_after_map)
-			{
-				free(line);
-				clear_gnl_buffer(fd);
-				freealloc_exit(map, "Content found after map end");
-			}
+				clear_map(line, map, fd);
 			map->grid[index++] = ft_strdup(line);
 		}
 		free(line);

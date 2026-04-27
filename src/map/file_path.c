@@ -6,11 +6,25 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 21:22:35 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:22:37 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 21:55:59 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
+
+void	map_validity(t_map *map)
+{
+	valid_char(map);
+	check_player(map);
+	valid_path(map->no_path, map);
+	valid_path(map->so_path, map);
+	valid_path(map->we_path, map);
+	valid_path(map->ea_path, map);
+	valid_colours(map->f_path, map);
+	valid_colours(map->c_path, map);
+	boundaries_check(map);
+	hex_colours(map);
+}
 
 static void	set_path(char *str, char *path, t_map *map)
 {

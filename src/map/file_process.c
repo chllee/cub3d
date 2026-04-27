@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:19:46 by pang              #+#    #+#             */
-/*   Updated: 2026/04/27 07:15:29 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 22:00:10 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ static int	handle_line(char *line, t_map *map, int fd)
 	return (0);
 }
 
+static t_map	*found_map(char *filename, t_map *map, int fd, int line_count)
+{
+	clear_gnl_buffer(fd);
+	close(fd);
+	store_map(filename, map, line_count - 1);
+	map_validity(map);
+	return (map);
+}
+
 t_map	*process_file(char *filename)
 {
 	int		fd;
@@ -78,28 +87,12 @@ t_map	*process_file(char *filename)
 		if (handle_line(line, map, fd))
 		{
 			free(line);
-			line = NULL;
-			clear_gnl_buffer(fd);
-			close(fd);
-			store_map(filename, map, line_count - 1);
-			return (map_validity(map), map);
+			return (found_map(filename, map, fd, line_count));
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	return (close(fd), freealloc_exit(map, "No map found"), NULL);
-}
-
-void	map_validity(t_map *map)
-{
-	valid_char(map);
-	check_player(map);
-	valid_path(map->no_path, map);
-	valid_path(map->so_path, map);
-	valid_path(map->we_path, map);
-	valid_path(map->ea_path, map);
-	valid_colours(map->f_path, map);
-	valid_colours(map->c_path, map);
-	boundaries_check(map);
-	hex_colours(map);
+	close(fd);
+	freealloc_exit(map, "No map found");
+	return (NULL);
 }
