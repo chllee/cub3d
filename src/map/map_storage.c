@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:12:39 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:25:32 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 07:13:57 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static int	read_map(int fd, t_map *map)
 			map->grid[index++] = ft_strdup(line);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (index);
 }

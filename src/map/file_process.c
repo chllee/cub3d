@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:19:46 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:23:55 by pang             ###   ########.fr       */
+/*   Updated: 2026/04/27 07:15:29 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ t_map	*process_file(char *filename)
 		if (handle_line(line, map, fd))
 		{
 			free(line);
+			line = NULL;
 			clear_gnl_buffer(fd);
 			close(fd);
 			store_map(filename, map, line_count - 1);
 			return (map_validity(map), map);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (close(fd), freealloc_exit(map, "No map found"), NULL);
 }
