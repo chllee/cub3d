@@ -1,45 +1,50 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/05/01 23:05:09 by pang              #+#    #+#              #
+#    Updated: 2026/05/01 23:05:09 by pang             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC      = cc
 CFLAGS  = -Wextra -Werror -Wall
 
 NAME    = cub3D
 
-# --- Directories ---
 LIBFT_DIR    = ./libft/libft01
 FTPRINTF_DIR = ./libft/ft_printf
 GNL_DIR      = ./libft/gnl
+MLX_DIR      = ./mlx
 SRC          = src
 OBJ          = obj
 
-# --- Libraries ---
 LIBFT_LIB     = $(LIBFT_DIR)/libft.a
 GNL_LIB       = $(GNL_DIR)/libftgnl.a
 FT_PRINTF_LIB = $(FTPRINTF_DIR)/libftprintf.a
+MLX_LIB       = $(MLX_DIR)/libmlx.a
 
-# --- Flags ---
 MINILIBX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LIBFT_FLAGS    = -L$(LIBFT_DIR) -lft
 FTPRINTF_FLAGS = -L$(FTPRINTF_DIR) -lftprintf
 GNL_FLAGS      = -L$(GNL_DIR) -lftgnl
 
-# --- Automatic Source/Object Discovery ---
-# This finds main.c in src/ and everything in src/maps/
 SRCS = $(shell find $(SRC) -name "*.c")
-# This maps src/maps/file.c to obj/maps/file.o
 OBJS = $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 
-# --- Includes ---
 INCLUDES = -I$(SRC) \
            $(addprefix -I, $(shell find $(SRC) -type d)) \
+		   -I$(MLX_DIR) \
            -I$(LIBFT_DIR) -I$(FTPRINTF_DIR) -I$(GNL_DIR)
-
-# --- Rules ---
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB)
+$(NAME): $(OBJS) $(MLX_LIB) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) $(FTPRINTF_FLAGS) $(GNL_FLAGS)
 
-# FIX: @mkdir -p $(dir $@) ensures subfolders like obj/maps/ are created
 $(OBJ)/%.o: $(SRC)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
@@ -53,8 +58,12 @@ $(GNL_LIB):
 $(FT_PRINTF_LIB):
 	@make -C $(FTPRINTF_DIR)
 
+$(MLX_LIB):
+	@make -C $(MLX_DIR)
+
 clean:
 	rm -rf $(OBJ)
+	@make -C $(MLX_DIR) clean
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(GNL_DIR) clean
 	@make -C $(FTPRINTF_DIR) clean

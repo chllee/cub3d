@@ -6,7 +6,7 @@
 /*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 14:08:25 by pang              #+#    #+#             */
-/*   Updated: 2026/04/21 21:27:48 by pang             ###   ########.fr       */
+/*   Updated: 2026/05/02 13:28:51 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "libft.h"
+# include "mlx.h"
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <math.h>
 
 typedef struct s_map
 {
@@ -53,7 +55,7 @@ int		parse_map(int argc, char **argv);
 void	exit_error(char *msg);
 void	free_map(t_map *map);
 void	freealloc_exit(t_map *map, char *msg);
-void	free_resources(t_map *map);
+void	free_map_resources(t_map *map);
 
 // map_storage.c
 t_map	*store_map(char *filename, t_map *map, int lines_tomap);
