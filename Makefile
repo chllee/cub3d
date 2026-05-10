@@ -6,6 +6,7 @@ NAME    = cub3D
 LIBFT_DIR    = ./libft/libft01
 FTPRINTF_DIR = ./libft/ft_printf
 GNL_DIR      = ./libft/gnl
+MLX_DIR      = .
 SRC_DIR      = src
 OBJ_DIR      = obj
 
@@ -18,12 +19,30 @@ LIBFT_FLAGS    = -L$(LIBFT_DIR) -lft
 FTPRINTF_FLAGS = -L$(FTPRINTF_DIR) -lftprintf
 GNL_FLAGS      = -L$(GNL_DIR) -lftgnl
 INCLUDES = -I$(SRC_DIR) \
+           -I./include \
            -I$(LIBFT_DIR) \
            -I$(FTPRINTF_DIR) \
-           -I$(GNL_DIR)
+           -I$(GNL_DIR) \
+           -I./mlx
 
-SRC_FILES = z_print_map.c main.c exit_utils.c map_storage.c map_validity.c \
-			utils.c file_process.c file_path.c texture_validity.c file_rgb.c
+SRC_FILES = main.c \
+			map/start_parse.c \
+			map/file_process.c \
+			map/file_path.c \
+			map/file_rgb.c \
+			map/map_storage.c \
+			map/map_validity.c \
+			map/texture_validity.c \
+			map/exit_utils.c \
+			map/utils.c \
+			map/z_print_map.c \
+			game/init.c \
+			game/events.c \
+			game/move.c \
+			render/render.c \
+			render/raycast.c \
+			render/draw.c \
+			render/texture.c
 
 SRC       = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ       = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -34,7 +53,7 @@ $(NAME): $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) $(FTPRINTF_FLAGS) $(GNL_FLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT_LIB):
