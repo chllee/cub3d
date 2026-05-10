@@ -47,6 +47,7 @@ static int	read_map(int fd, t_map *map)
 			map->grid[index++] = ft_strdup(line);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (index);
 }
@@ -71,7 +72,7 @@ t_map	*store_map(char *filename, t_map *map, int lines_tomap)
 	map->grid = malloc(sizeof(char *) * 1024);
 	if (!map->grid)
 		freealloc_exit(map, "Map grid allocation fail");
-	ft_bzero(map->grid, 1024);
+	ft_bzero(map->grid, sizeof(char *) * 1024);
 	map->y_max = read_map(fd, map);
 	close(fd);
 	return (map);

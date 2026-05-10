@@ -47,7 +47,7 @@ typedef struct s_map
 }	t_map;
 
 // start map parsing (original filename: main.c)
-int		parse_map(int argc, char **argv);
+t_map	*parse_map(int argc, char **argv);
 
 // exit_utils.c
 void	exit_error(char *msg);

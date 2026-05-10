@@ -84,6 +84,7 @@ t_map	*process_file(char *filename)
 			return (map_validity(map), map);
 		}
 		free(line);
+		line = get_next_line(fd);
 	}
 	return (close(fd), freealloc_exit(map, "No map found"), NULL);
 }

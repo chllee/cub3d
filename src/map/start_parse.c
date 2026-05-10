@@ -12,8 +12,7 @@
 
 #include "map.h"
 
-// print_map(map) is for debug
-int	parse_map(int argc, char **argv)
+t_map	*parse_map(int argc, char **argv)
 {
 	t_map	*map;
 
@@ -21,7 +20,5 @@ int	parse_map(int argc, char **argv)
 		exit_error("Invalid argument");
 	file_ext(argv[1]);
 	map = process_file(argv[1]);
-	print_map(map);
-	free_resources(map);
-	return (0);
+	return (map);
 }

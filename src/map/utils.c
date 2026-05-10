@@ -43,7 +43,10 @@ void	clear_gnl_buffer(int fd)
 
 	line = get_next_line(fd);
 	while (line)
+	{
 		free(line);
+		line = get_next_line(fd);
+	}
 }
 
 void	free_split(char **str)
