@@ -1,0 +1,3 @@
+- collision
+- when it faces the wall, it looks warped -> distance between the wall and person
+

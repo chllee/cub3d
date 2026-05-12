@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chllee <chllee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:00:00 by chllee            #+#    #+#             */
-/*   Updated: 2026/05/10 00:00:00 by chllee           ###   ########.fr       */
+/*   Updated: 2026/05/12 20:47:34 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "map/map.h"
+# include "map.h"
 # include "mlx.h"
 # include <math.h>
 # include <stdlib.h>
 
 # define WIN_W		640
 # define WIN_H		480
-# define MOVE_SPEED	0.04
-# define ROT_SPEED	0.03
+# define MOVE_SPEED	0.01
+# define ROT_SPEED	0.01
+# define MARGIN		0.5
 
 # define TEX_NO		0
 # define TEX_SO		1

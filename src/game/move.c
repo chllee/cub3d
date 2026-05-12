@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chllee <chllee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:00:00 by chllee            #+#    #+#             */
-/*   Updated: 2026/05/10 00:00:00 by chllee           ###   ########.fr       */
+/*   Updated: 2026/05/12 20:47:04 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,32 @@ static void	rotate(t_game *g, double speed)
 		+ g->player.plane_y * cos(speed);
 }
 
-static void	move_player(t_game *g, double dx, double dy)
+/* static void	move_player(t_game *g, double dx, double dy)
 {
 	double	nx;
 	double	ny;
 
 	nx = g->player.pos_x + dx;
 	ny = g->player.pos_y + dy;
-	if (!is_wall(g->map, (int)nx, (int)g->player.pos_y))
+	if (!is_wall(g->map, (int)(nx + MARGIN), (int)g->player.pos_y))
 		g->player.pos_x = nx;
-	if (!is_wall(g->map, (int)g->player.pos_x, (int)ny))
+	if (!is_wall(g->map, (int)g->player.pos_x, (int)(ny + MARGIN)))
 		g->player.pos_y = ny;
+} */
+
+static void	move_player(t_game *g, double dx, double dy)
+{
+    double	nx;
+    double	ny;
+
+    nx = g->player.pos_x + dx;
+    ny = g->player.pos_y + dy;
+    if (!is_wall(g->map, (int)(nx + MARGIN), (int)g->player.pos_y)
+        && !is_wall(g->map, (int)(nx - MARGIN), (int)g->player.pos_y))
+        g->player.pos_x = nx;
+    if (!is_wall(g->map, (int)g->player.pos_x, (int)(ny + MARGIN))
+        && !is_wall(g->map, (int)g->player.pos_x, (int)(ny - MARGIN)))
+        g->player.pos_y = ny;
 }
 
 static void	handle_rotation(t_game *g)

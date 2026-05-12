@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chllee <chllee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:00:00 by chllee            #+#    #+#             */
-/*   Updated: 2026/05/10 00:00:00 by chllee           ###   ########.fr       */
+/*   Updated: 2026/05/12 21:41:10 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ int	get_tex_x(t_ray *r, t_player *p, int tex_w)
 		wall_x = p->pos_x + r->perp_wall_dist * r->ray_dir_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * tex_w);
-	if (r->side == 0 && r->ray_dir_x > 0)
+	if (r->side == 0 && r->ray_dir_x < 0)
 		tex_x = tex_w - tex_x - 1;
-	if (r->side == 1 && r->ray_dir_y < 0)
+	if (r->side == 1 && r->ray_dir_y > 0)
 		tex_x = tex_w - tex_x - 1;
 	return (tex_x);
 }

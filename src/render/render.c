@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chllee <chllee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 00:00:00 by chllee            #+#    #+#             */
-/*   Updated: 2026/05/10 00:00:00 by chllee           ###   ########.fr       */
+/*   Updated: 2026/05/12 20:08:57 by pang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	get_wall_bounds(double perp_dist, int *top, int *bot)
 {
 	int	line_h;
 
+	if (perp_dist < 0.1)
+		perp_dist = 0.1;
 	line_h = (int)(WIN_H / perp_dist);
 	*top = WIN_H / 2 - line_h / 2;
 	*bot = WIN_H / 2 + line_h / 2;

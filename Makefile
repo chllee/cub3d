@@ -1,14 +1,27 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: pang <pang@student.42singapore.sg>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/05/12 19:45:51 by pang              #+#    #+#              #
+#    Updated: 2026/05/12 19:45:51 by pang             ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC      = cc
 CFLAGS  = -Wextra -Werror -Wall
 
-NAME    = cub3D
+NAME    = cub3d
 
 LIBFT_DIR    = ./libft/libft01
 FTPRINTF_DIR = ./libft/ft_printf
 GNL_DIR      = ./libft/gnl
-MLX_DIR      = .
+MLX_DIR      = ./mlx
 SRC_DIR      = src
 OBJ_DIR      = obj
+INC_DIR      = include
 
 LIBFT_LIB     = $(LIBFT_DIR)/libft.a
 GNL_LIB       = $(GNL_DIR)/libftgnl.a
@@ -18,31 +31,35 @@ MINILIBX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 LIBFT_FLAGS    = -L$(LIBFT_DIR) -lft
 FTPRINTF_FLAGS = -L$(FTPRINTF_DIR) -lftprintf
 GNL_FLAGS      = -L$(GNL_DIR) -lftgnl
+
+HEADERS = $(INC_DIR)/cub3d.h \
+          $(INC_DIR)/map.h
+
 INCLUDES = -I$(SRC_DIR) \
-           -I./include \
+           -I./$(INC_DIR) \
            -I$(LIBFT_DIR) \
            -I$(FTPRINTF_DIR) \
            -I$(GNL_DIR) \
            -I./mlx
 
 SRC_FILES = main.c \
-			map/start_parse.c \
-			map/file_process.c \
-			map/file_path.c \
-			map/file_rgb.c \
-			map/map_storage.c \
-			map/map_validity.c \
-			map/texture_validity.c \
-			map/exit_utils.c \
-			map/utils.c \
-			map/z_print_map.c \
-			game/init.c \
-			game/events.c \
-			game/move.c \
-			render/render.c \
-			render/raycast.c \
-			render/draw.c \
-			render/texture.c
+            map/start_parse.c \
+            map/file_process.c \
+            map/file_path.c \
+            map/file_rgb.c \
+            map/map_storage.c \
+            map/map_validity.c \
+            map/texture_validity.c \
+            map/exit_utils.c \
+            map/utils.c \
+            map/z_print_map.c \
+            game/init.c \
+            game/events.c \
+            game/move.c \
+            render/render.c \
+            render/raycast.c \
+            render/draw.c \
+            render/texture.c
 
 SRC       = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ       = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -52,18 +69,18 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(FT_PRINTF_LIB)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MINILIBX_FLAGS) $(LIBFT_FLAGS) $(FTPRINTF_FLAGS) $(GNL_FLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 $(LIBFT_LIB):
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 $(GNL_LIB):
-	make -C $(GNL_DIR)
+	@make -C $(GNL_DIR)
 
 $(FT_PRINTF_LIB):
-	make -C $(FTPRINTF_DIR)
+	@make -C $(FTPRINTF_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR)
